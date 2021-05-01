@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.rides_table {
+    width: 100%;
+
+}
+
+.rides_table table, th, td, button{
+    border: 1px solid black;
+    padding: 0.5em;
+}
+
+@media(max-width:576px) {
+    .wrapper {
+        padding: 25px 20px
+    }
+
+    #deactivate {
+        line-height: 18px
+    }
+}
