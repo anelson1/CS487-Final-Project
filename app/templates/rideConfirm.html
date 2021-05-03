@@ -1,26 +1,8 @@
 <!DOCTYPE html>
-<html>
 
-<head>
-    <title>Confirm a Ride</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="apple-touch-icon" href="../assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
-    
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/templatemo.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+{%extends "header.html"%}
+   
+{%block content%}
     <style>
 
 
@@ -114,43 +96,6 @@
             }
         }
     </style>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex justify-content-between align-items-center">
-    
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                Taxi
-            </a>
-    
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
-                id="templatemo_main_nav">
-                <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="tripHistory.html">My Trips</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="riderAccount.html">Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <section class="bg-light py-5">
         <div class="container my-4">
@@ -159,8 +104,7 @@
                     <h1 class="h1">Confirm a <b>Ride</b></h1>
                 </div>
             </div>
-            <form action="/action_page.php">
-            
+            <form action="/complete">
                 <div class="row">
                     <div class="col-50">
                         <h3>Billing Address</h3>
@@ -217,7 +161,7 @@
                     <input type="checkbox" name="sameadr"> Save the card information
                 </label>
                 &nbsp;
-                <form action="/trips" method="post">
+              
                     <div class="form-group required">
                         <label for="seats">Add tips for the driver</label>
                         <div class="input-group">
@@ -227,7 +171,7 @@
                             <input class="form-control" type="number" min="0" step="0.01" name="tips" required>
                         </div>
                     </div>
-                </form>
+                
                 &nbsp;
 
                 <h4>Total  <span class="price" style="color:black"></span>
@@ -246,7 +190,4 @@
 
     </section>
         
-
-</body>
-
-</html>
+{%endblock%}

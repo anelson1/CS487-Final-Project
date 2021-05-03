@@ -1,28 +1,8 @@
 <!DOCTYPE html>
-<html>
 
-<head>
-    <title>See the Route</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/templatemo.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="../assets/css/fontawesome.min.cs
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{%extends "header.html"%}
+   
+{%block content%}
     <style>
         #form {
             margin-top: 50px;
@@ -41,45 +21,6 @@
             padding: 0;
         }
     </style>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex justify-content-between align-items-center">
-    
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                Taxi
-            </a>
-    
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
-                id="templatemo_main_nav">
-                <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="tripHistory.html">My Trips</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="riderAccount.html">Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-    
-        </div>
-    </nav>
-
 
     <div class="container">
 
@@ -103,7 +44,6 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ-2N80rK2kidBJstxDFz5Z-n072YYDhk&libraries=places&callback=initAutocomplete"
         async defer></script>
-    <script src="../assets/js/getRoute.js"></script>
-</body>
+    <script src="static/assets/js/getRoute.js"></script>
 
-</html>
+{%endblock%}
