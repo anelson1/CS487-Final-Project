@@ -1,8 +1,25 @@
 from flask import *
-from app import myapp
+from app import myapp, db
 from datetime import date
+from flask_sqlalchemy import SQLAlchemy
 
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique = True)
+    password = db.Column(db.String(50))
+    def __repr__(self):
+        return "User: " + self.username
+class Trip(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    origin = db.Column(db.String(50))
+    destination = db.Column(db.String(50))
+    riders = db.Column(db.String(12))
+    time = db.Column(db.String(20))
+    date = db.Column(db.String(20))
+
+    def __repr__(self):
+        return "trip: " + str(self.id)
 #Home Page
 @myapp.route("/", methods=['GET', 'POST'])
 def index():
@@ -21,7 +38,7 @@ def riderlogin():
     return render_template("riderLogIn.html")    
 @myapp.route("/registered", methods=['GET', 'POST'])
 def registered():
-    name = request.args.get('name')
+    name = request.form['username']
     return render_template("registered.html", name=name)
 @myapp.route("/rideraccount", methods=['GET', 'POST'])
 def rideraccount():
@@ -32,7 +49,8 @@ def driverlogin():
 @myapp.route("/driveraccount", methods=['GET', 'POST'])
 def driveraccount():
     name = request.args.get('name')
-    return render_template("driverAccount.html", name = name)  
+    trips = Trip.query.all()
+    return render_template("driverAccount.html", name = name, trips = trips)  
 @myapp.route("/driversignup", methods=['GET', 'POST'])
 def driversignup():
     return render_template("driverSignUp.html")  
@@ -41,12 +59,15 @@ def ridersignup():
     return render_template("riderSignUp.html")  
 @myapp.route("/book", methods=['GET', 'POST'])
 def riderbook():
-    name = request.args.get('name')
+    name = request.form['username']
     return render_template("rideBook.html", name=name)  
 @myapp.route("/confirm", methods=['GET', 'POST'])
 def riderconfirm():
     session['origin'] = request.form['origin']
     session['destination'] = request.form['destination']
+    newtrip = Trip(origin = session['origin'], destination = session['destination'], riders=request.form['riders'], date = request.form['date'], time=request.form['time'])
+    db.session.add(newtrip)
+    db.session.commit()
     return render_template("rideConfirm.html")  
 @myapp.route("/route", methods=['GET', 'POST'])
 def rideroute():

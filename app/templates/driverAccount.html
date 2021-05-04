@@ -11,6 +11,36 @@
                     <h1>Welcome {{name}}</h1>
                     <h2>Rate: 4.8/5</h2>
                     <h3>Here are the avalible rides</h3>
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Origin</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Riders</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Take this ride?</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {%for i in trips%}
+                          <tr>
+                            <th scope="row">{{i.id}}</th>
+                            <td>{{i.origin}}</td>
+                            <td>{{i.destination}}</td>
+                            <td>{{i.riders}}</td>
+                            <td>{{i.date}}</td>
+                            <td>{{i.time}}</td>
+                            <td>
+                                <form>
+                                  <button class="btn btn-outline-light" type="submit">Claim</button>
+                                </form>
+                              </td>
+                          </tr>
+                          {%endfor%}
+                        </tbody>
+                      </table>
                 </div>
                 <div class="col-md-4">
                     <img src="static/assets/img/about-hero.svg" alt="About Hero">
@@ -22,7 +52,7 @@
 
 
 
-
+    
     
 
     {%endblock%}
