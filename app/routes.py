@@ -88,7 +88,7 @@ def driverlogin():
     return render_template("driverLogIn.html")  
 @myapp.route("/driveraccount", methods=['GET', 'POST'])
 def driveraccount():
-    name = request.args.get('name')
+    name = request.form['name']
     trips = Trip.query.all()
     return render_template("driverAccount.html", name = name, trips = trips)  
 @myapp.route("/driversignup", methods=['GET', 'POST'])
