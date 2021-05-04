@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user, login_required
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
@@ -10,4 +11,6 @@ class Config(object):
 myapp = Flask(__name__)
 myapp.config.from_object(Config)
 db = SQLAlchemy(myapp)
+
+
 from app import routes

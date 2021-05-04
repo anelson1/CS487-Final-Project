@@ -7,6 +7,11 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="container">
+                    {%if error%}
+                    <div class="alert alert-danger" role="alert">
+                        Oops! Your username or password is incorrect!
+                      </div>
+                    {%endif%}
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
                             <img class="img-fluid" src="static/assets/img/driverWelcomeBack.png" alt="">
@@ -15,7 +20,7 @@
                             <div class="text-align-left align-self-center">
                                 <h2>Welcome Back</h2>
                                 <p>Log in as a rider</p>
-                                <form id="loginForm", action="/book", method="POST">
+                                <form id="loginForm", action="/loginhandle", method="POST">
                                     <div>
                                         <label>Username</label>
                                         <input type="text" name="username" class="form-control"

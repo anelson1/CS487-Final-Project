@@ -40,9 +40,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/about">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/As">Log In / SignUp</a>
-                        </li>
+                       
+                            {%if not current_user.is_anonymous%}
+                            <li class="nav-item">
+                            <form class="form-inline mb-0" action="/rideraccount">
+                           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Dashboard</button>
+                           </form>
+                           </li>
+                           <li class="nav-item">
+                           <form class="form-inline mb-0" action="/logouthandle">
+                           <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Log Out</button>
+                           </form>
+                           </li>
+                           {%endif%}
 
                     </ul>
                 </div>
