@@ -17,7 +17,11 @@
                       <tr>
                         <th scope="col">Username</th>
                         <th scope="col">Address</th>
-                        <th scope="col">Phone Number</th>
+                        <th scope="col">Phone Number</th>  
+                        <th scope="col">Favorite Places</th>                        
+                      
+                        <th scope="col">Edit Info</th>
+
                        
                       </tr>
                     </thead>
@@ -26,10 +30,43 @@
                         <th scope="row">{{current_user.username}}</th>
                         <td>{{current_user.address}}</td>
                         <td>{{current_user.phonenumber}}</td>
-                        
+                        <td>{{current_user.favoriteplaces}}</td>
+                        <form action="/changeinfo"><td><button type="submit" class="btn btn-primary">Edit</button></td></form>
+
                       </tr>
                     </tbody>
                   </table>
+                  <h1>Previous Rides</h1>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Origin</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Riders</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Price</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {%for i in rides%}
+                      <tr>
+                        <th scope="row">{{i.id}}</th>
+                        <td>{{i.origin}}</td>
+                        <td>{{i.destination}}</td>
+                        <td>{{i.riders}}</td>
+                        <td>{{i.date}}</td>
+                        <td>{{i.time}}</td>
+                        <td>${{i.price}}</td>
+
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+                 
+                  <h2>You have spent ${{sum}} on rides since you registered</h2>
                 </div>
                 <div class="col-md-4">
                     <img src="static/assets/img/riderAccount.png" alt="About Hero">

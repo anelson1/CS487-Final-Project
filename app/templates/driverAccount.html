@@ -20,22 +20,30 @@
                             <th scope="col">Riders</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Booker</th>
+
                             <th scope="col">Take this ride?</th>
                           </tr>
                         </thead>
                         <tbody>
                             {%for i in trips%}
                           <tr>
-                            <th scope="row">{{i.id}}</th>
+                            <form action="/accept" method="POST">
+                            <th scope="row">
+                              {{i.id}}
+                              
+                            </th>
                             <td>{{i.origin}}</td>
                             <td>{{i.destination}}</td>
                             <td>{{i.riders}}</td>
                             <td>{{i.date}}</td>
                             <td>{{i.time}}</td>
+                            <td>${{i.price}}</td>
+                            <td>{{i.booker}}</td>
                             <td>
-                                <form>
-                                  <button class="btn btn-outline-light" type="submit">Claim</button>
-                                  <button class="btn btn-danger" type="submit">Deny</button>
+                                  <button class="btn btn-light m-1" type="submit">Claim</button>
+                                  <button class="btn btn-danger m-1" type="submit">Reject</button>
                                 </form>
                               </td>
                           </tr>

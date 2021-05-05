@@ -3,7 +3,9 @@ from app import myapp, db
 from datetime import date
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user, login_required
+import random
 
+random.randrange(1,10)
 
 login_manager = LoginManager()
 login_manager.init_app(myapp)
@@ -13,6 +15,8 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(50))
     address = db.Column(db.String(50))
     phonenumber = db.Column(db.String(50))
+    favoriteplaces = db.Column(db.String(100))
+    profit = db.Column(db.String(20))
 
     def __repr__(self):
         return "User: " + self.username
@@ -23,6 +27,8 @@ class Trip(db.Model):
     riders = db.Column(db.String(12))
     time = db.Column(db.String(20))
     date = db.Column(db.String(20))
+    price = db.Column(db.String(20))
+    booker = db.Column(db.String(20))
 
     def __repr__(self):
         return "trip: " + str(self.id)
@@ -57,13 +63,17 @@ def registered():
     password = request.form['pswd']
     phone = request.form['phone']
     address = request.form['address']
-    newuser = User(username=name, password = password, phonenumber = phone, address=address)
+    newuser = User(username=name, password = password, phonenumber = phone, address=address, favoriteplaces = "")
     db.session.add(newuser)
     db.session.commit()
     return render_template("registered.html", name=name)
 @myapp.route("/rideraccount", methods=['GET', 'POST'])
 def rideraccount():
-    return render_template("riderAccount.html")
+    rides = Trip.query.filter_by(booker=current_user.username)
+    sum = 0
+    for i in rides:
+        sum = sum + float(i.price)
+    return render_template("riderAccount.html", rides = rides, sum = sum)
 @myapp.route("/loginhandle", methods = ["POST","GET"])
 def formhandler():
     user = request.form['username']
@@ -104,14 +114,35 @@ def riderbook():
 def riderconfirm():
     session['origin'] = request.form['origin']
     session['destination'] = request.form['destination']
-    newtrip = Trip(origin = session['origin'], destination = session['destination'], riders=request.form['riders'], date = request.form['date'], time=request.form['time'])
+    session['price'] = random.randrange(20,40)
+    newtrip = Trip(origin = session['origin'], destination = session['destination'], riders=request.form['riders'], date = request.form['date'], time=request.form['time'], booker = current_user.username, price = session['price']+5+1.05)
     db.session.add(newtrip)
     db.session.commit()
-    return render_template("rideConfirm.html")  
+    return render_template("rideConfirm.html", price = session['price'])  
 @myapp.route("/route", methods=['GET', 'POST'])
 def rideroute():
     return render_template("rideRoute.html")  
 @myapp.route("/complete", methods=['GET', 'POST'])
 def rideComplete():
-    return render_template("rideComplete.html", origin = session['origin'], destination = session['destination'], date= date.today()
+    return render_template("rideComplete.html", origin = session['origin'], destination = session['destination'], date= date.today(), price = session["price"] + 1.05 + 5,
 )  
+@myapp.route("/changeinfo", methods=['GET', 'POST'])
+def changeinfo():
+    return render_template("riderAccountEdit.html") 
+@myapp.route("/updateinfo", methods=['GET','POST'])
+def updateinfo():
+    addr = request.form['address']
+    pnum = request.form['pnum']
+    fp = request.form['fp']
+    curr_user = User.query.filter_by(username=current_user.username).first()
+    curr_user.address = addr
+    curr_user.phonenumber = pnum
+    curr_user.favoriteplaces = fp
+    db.session.commit()
+    return redirect(url_for("rideraccount"))
+@myapp.route("/accept", methods=['GET', 'POST'])
+def accept():
+    return render_template("riderAccountEdit.html") 
+@myapp.route("/reject", methods=['GET', 'POST'])
+def reject():
+    return render_template("riderAccountEdit.html") 
